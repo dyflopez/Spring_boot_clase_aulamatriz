@@ -49,8 +49,9 @@ public class UserController {
     }
 
 
+
     /**
-     * Actualizar por identificacion
+     * Probar el PUT
      */
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable long id,
