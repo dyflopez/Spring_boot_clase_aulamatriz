@@ -2,11 +2,12 @@ package com.app.aulamatriz.micro.usuarios.controller;
 
 
 import com.app.aulamatriz.micro.usuarios.dto.UserDto;
+import com.app.aulamatriz.micro.usuarios.model.UserEntity;
 import com.app.aulamatriz.micro.usuarios.service.IUserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -18,10 +19,9 @@ public class UserController {
         this.iUserService = iUserService;
     }
 
-    //Get es para obtner informacion en la base datos
     @GetMapping
-    public String getAllUsers(){
-        return "lista de usuarios";
+    public ResponseEntity getAllUsers(){
+        return this.iUserService.getAll();
     }
 
 
@@ -38,5 +38,23 @@ public class UserController {
                 .stream()
                 .filter(s-> !s.isStatus())
                 .count();
+    }
+    /**
+     * Busqueda por Id del usuario
+     */
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable long id){
+        return this.iUserService.deleteById(id);
+    }
+
+
+    /**
+     * Actualizar por identificacion
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity update(@PathVariable long id,
+                                 @RequestBody UserDto userDto){
+        return  this.iUserService.updateById(id,userDto);
     }
 }
