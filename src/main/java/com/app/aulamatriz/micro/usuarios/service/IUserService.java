@@ -17,5 +17,6 @@ public interface IUserService {
     ResponseEntity updateById(long id , UserDto userDto);
 
     ResponseEntity getByDocumentWithJPQL(String document);
+    ResponseEntity getByDocumentWithJPARepository(String document);
 
 }

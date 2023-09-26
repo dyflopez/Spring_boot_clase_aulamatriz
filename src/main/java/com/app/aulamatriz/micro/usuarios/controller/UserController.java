@@ -7,6 +7,7 @@ import com.app.aulamatriz.micro.usuarios.service.IUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,10 +30,15 @@ public class UserController {
         return  this.iUserService.getByDocumentWithJPQL(document);
     }
 
+    @GetMapping("/document-jpa/{document}")
+    public ResponseEntity getUserByDocument(@PathVariable String document){
+        return  this.iUserService.getByDocumentWithJPARepository(document);
+    }
+
 
     //POST se usa para guardar informacion en la base de datos
     @PostMapping
-    public String save(@RequestBody UserDto userDto){
+    public String save(@RequestBody @Valid UserDto userDto){
         return  iUserService.save(userDto);
     }
 

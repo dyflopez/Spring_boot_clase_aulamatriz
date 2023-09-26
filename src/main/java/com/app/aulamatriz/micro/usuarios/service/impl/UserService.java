@@ -6,10 +6,9 @@ import com.app.aulamatriz.micro.usuarios.repository.UserRepository;
 import com.app.aulamatriz.micro.usuarios.service.IUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService {
@@ -22,6 +21,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional //UPDATE  , DELETE, INSERT
     public String save(UserDto userDto) {
         userDto
                 .getSons()
@@ -40,18 +40,21 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional(readOnly = true) //SELECT
     public ResponseEntity getAll() {
         var entityList = this.userRepository.findAll();
         return ResponseEntity.ok(entityList);
     }
 
     @Override
+    @Transactional
     public ResponseEntity deleteById(long id) {
         this.userRepository.deleteById(id);
         return ResponseEntity.ok("Se borro");
     }
 
     @Override
+    @Transactional
     public ResponseEntity updateById(long id, UserDto userDto) {
         //Buscar el usuario por ID
         var user =this.userRepository.findById(id).get();
@@ -68,8 +71,15 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ResponseEntity getByDocumentWithJPQL(String document) {
         var user = this.userRepository.getUserByDocument(document).orElse(new UserEntity());
+        return ResponseEntity.ok(user);
+    }
+    @Override
+    @Transactional(readOnly = true)
+    public ResponseEntity getByDocumentWithJPARepository(String document) {
+        var user = this.userRepository.findByDocument(document).orElse(new UserEntity());
         return ResponseEntity.ok(user);
     }
 }
