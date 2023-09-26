@@ -24,6 +24,11 @@ public class UserController {
         return this.iUserService.getAll();
     }
 
+    @GetMapping("/document-jpql/{document}")
+    public ResponseEntity getUserByDocumentJPQL(@PathVariable String document){
+        return  this.iUserService.getByDocumentWithJPQL(document);
+    }
+
 
     //POST se usa para guardar informacion en la base de datos
     @PostMapping

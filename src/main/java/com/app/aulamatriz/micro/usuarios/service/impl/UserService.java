@@ -66,4 +66,10 @@ public class UserService implements IUserService {
 
         return ResponseEntity.ok("usuario actualizado");
     }
+
+    @Override
+    public ResponseEntity getByDocumentWithJPQL(String document) {
+        var user = this.userRepository.getUserByDocument(document).orElse(new UserEntity());
+        return ResponseEntity.ok(user);
+    }
 }
