@@ -2,13 +2,11 @@ package com.app.aulamatriz.micro.usuarios.controller;
 
 
 import com.app.aulamatriz.micro.usuarios.dto.UserDto;
-import com.app.aulamatriz.micro.usuarios.model.UserEntity;
 import com.app.aulamatriz.micro.usuarios.service.IUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 public class UserController {

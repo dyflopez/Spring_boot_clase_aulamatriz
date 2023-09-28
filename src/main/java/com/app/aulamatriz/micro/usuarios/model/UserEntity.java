@@ -21,12 +21,12 @@ public class UserEntity {
 
     private String lastname;
 
-    @Column(name = "phonenumber")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     private String document;
 
-    @Column(name = "typedocument")
+    @Column(name = "type_document")
     private String typeDocument;
 
 }
