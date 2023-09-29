@@ -21,11 +21,19 @@ public class UserDto {
         @NotNull(message = "el mensaje no puede ser null")
         private String lastname;
 
+        @NotBlank
+        @NotEmpty
         private String phoneNumber;
 
+        @NotBlank
+        @NotEmpty
         private String document;
 
+        @NotBlank
+        @NotEmpty
         private String typeDocument;
+
+        private String email;
 
         private List<SonsDto> sons;
 }

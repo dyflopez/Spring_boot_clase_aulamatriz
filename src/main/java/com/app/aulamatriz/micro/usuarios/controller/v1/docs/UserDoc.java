@@ -15,7 +15,10 @@ import javax.validation.Valid;
 @Tag(name = "User",description = "API para interacturar con el USER")
 public interface UserDoc {
 
-    @Operation(summary = "crear usurio",description = "Este api crea un usuario")
+    @Operation(
+            summary = "crear usurio",
+            description = "Este api crea un usuario"
+    )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
             description = "El usuario fue creado correctamente",
@@ -24,7 +27,6 @@ public interface UserDoc {
             description = "Error al crear el usuario",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)),
     })
-
     ResponseEntity create(@Valid @RequestBody UserDto userDto);
 
     @Operation(summary = "listar usuarios",description = "Listar todos los usuarios")
