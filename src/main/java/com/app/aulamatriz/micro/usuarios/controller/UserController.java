@@ -3,6 +3,7 @@ package com.app.aulamatriz.micro.usuarios.controller;
 
 import com.app.aulamatriz.micro.usuarios.dto.UserDto;
 import com.app.aulamatriz.micro.usuarios.service.IUserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,8 @@ import javax.validation.Valid;
 public class UserController {
     //private UserService userService = new UserService();
 
+    @Value("${control.exception.system}")
+    private String miVariable;
     private final IUserService iUserService;
 
     public UserController(IUserService iUserService) {
@@ -66,5 +69,11 @@ public class UserController {
     public ResponseEntity update(@PathVariable long id,
                                  @RequestBody UserDto userDto){
         return  this.iUserService.updateById(id,userDto);
+    }
+
+
+    @GetMapping("/variable")
+    public ResponseEntity  getVariable(){
+        return ResponseEntity.ok(miVariable);
     }
 }
